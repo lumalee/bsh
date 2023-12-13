@@ -75,11 +75,9 @@
     <main>
       <p>Score: <span id="score-display">0</span></p>
       <p id="message"></p>
-
       <div id="ticker-container">
         <div id="ticker-text">pet georgie to see how fast he can go</div>
       </div>
-
       <div id="georgie"></div>
     </main>
     
@@ -109,12 +107,69 @@
         "You have better things to do with your time surely",
         "Bombastic side eye",
         "Criminally offensive side eye",
-        "Ok whatever, you do you boo"
+        "Ok whatever, you do you boo",
+        "Ok I'll give you more cat facts while you keep clicking",
+        "Georgie is a British Shorthair mix",
+        "We dont actually know that, we just suspect",
+        "He has very large bone structure and is heavy",
+        "He is NOT fat tho",
+        "Cats slow blink to say \"I love you\"",
+        "If you foster fail, you should try fostering again",
+        "I added that so Hunter lets me foster again",
+        "Georgie must be going really fast now",
+        "I promise you can stop, you did great",
+        "Ok you're determined",
+        "Have you considered therapy?",
+        "I ran out of things to say... you're too far in",
+        "Did ChatGPT generate these messages?",
+        // ChatGPT Generated Messages
+        "That's a lot of clicks for a cat",
+        "Impressive commitment, really",
+        "Georgie's fame grows with every click",
+        "He's probably napping now, just saying",
+        "Do you think Georgie's judging you?",
+        "Your clicker finger must be in great shape",
+        "Georgie's considering a career in motivational clicking",
+        "Clicking: 1, Productivity: 0",
+        "Georgie's wondering if you have a life outside of clicking",
+        "You've officially spent more time on this than I did writing it",
+        "Is this your new favorite pastime?",
+        "Georgie thinks you need a hobby",
+        "If only there were medals for excessive clicking...",
+        "Georgie's fan club just gained a member",
+        "Clicking a cat: The epitome of productivity",
+        "Georgie wants to know if you've blinked at all",
+        "You're approaching \"clicked a cat for an hour\" level of procrastination",
+        "Georgie's contemplating the meaning of your clicks",
+        "You do know there are other things to click on the internet, right?",
+        "Georgie might need an agent at this rate",
+        "Clicking: the silent killer of productivity",
+        "Georgie's getting worried about your click addiction",
+        "At this point, Georgie's considering charging admission",
+        "Clicking on a cat: a life well spent, right?",
+        "Georgie's asking for a raise in treats per click",
+        "You've clicked more than Georgie's daily nap count",
+        "Is Georgie your new life coach or just a clickable distraction?",
+        "Georgie's considering copyrighting his clicks",
+        "Georgie might need a manager soon",
+        "You've clicked so much, Georgie's considering early retirement",
+        "Georgie's contemplating a memoir: \"The Clicks I Inspired\"",
+        "If Georgie could talk, he'd probably ask you to stop. But he can't.",
+        "You've clicked enough to earn a virtual high five from Georgie",
+        "Georgie's thinking about starting a clickers anonymous support group",
+        "You're one click away from cat-clicking enlightenment",
+        "Georgie's considering trademarking \"The Clickening\"",
+        "Georgie's wondering if you're a cat in disguise",
+        "Clicking on Georgie: the ultimate test of self-control",
+        "You've clicked so much that Georgie's starting to question reality",
+        "Georgie's thinking about charging admission to his fan club",
+        "Seriously, you good bro",
+        ""
       ];
 
       function updateMessage() {
         const messageIndex = Math.floor((counter - 1) / 2);
-        message.textContent = messages[Math.min(messageIndex, messages.length - 1)] || "You good bro?";
+        message.textContent = messages[Math.min(messageIndex, messages.length - 1)] || "";
       }
 
       function animate() {
@@ -138,8 +193,9 @@
 
         window.requestAnimationFrame(animate);
       }
-
-      georgie.addEventListener("click", (e) => {
+      
+      document.body.addEventListener("click", (e) => {
+      // georgie.addEventListener("click", (e) => {
         speed++;
         counter++;
         score.textContent = counter;
