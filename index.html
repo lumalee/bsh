@@ -9,23 +9,23 @@
       * {
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
       }
       body {
         margin: 0;
         overflow: hidden;
-        cursor: url('img/pointer.png'), pointer;
         color: white;
+        user-select: none;
+        cursor: url('img/pointer.png'), pointer;
         font-family: 'Preahvihear', sans-serif;
+      }
+      main {
+        height: 100vh;
+        width: 100vw;
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("img/georgie-small.png");
       }
       p {
         text-align: center;
         font-size: 2rem;
-      }
-      #background {
-        height: 100vh;
-        width: 100vw;
-        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("img/georgie-small.png");
       }
       #georgie {
         position: absolute;
@@ -43,13 +43,11 @@
         top: 50%;
         transform: translateY(-50%);
         width: 100%;
-        text-align: center;
       }
       #ticker-text {
         font-size: 4rem;
         display: inline-block;
-        animation: ticker 10s linear infinite;
-        user-select: none;
+        animation: ticker 10s linear forwards;
       }
       @keyframes ticker {
         from {
@@ -64,6 +62,9 @@
           width: 144px;
           height: 224px;
         }
+        #message {
+          font-size: 1.5rem;
+        }
         #ticker-text {
           display: none;
         }
@@ -71,11 +72,14 @@
     </style>
   </head>
   <body>
-    <main id="background">
+    <main>
       <p>Score: <span id="score-display">0</span></p>
+      <p id="message"></p>
+
       <div id="ticker-container">
-        <div id="ticker-text">click teh georgie to see how fast he can go!</div>
+        <div id="ticker-text">pet georgie to see how fast he can go</div>
       </div>
+
       <div id="georgie"></div>
     </main>
     
@@ -86,28 +90,52 @@
         dirY = 1;
       let speed = 2.5;
       let counter = 0;
-      let score = document.getElementById('score-display');
+      let score = document.getElementById("score-display");
       let georgie = document.getElementById("georgie");
-      
-      const georgieWidth = georgie.clientWidth;
-      const georgieHeight = georgie.clientHeight;
+
+      const messages = [
+        "Isn't he the cutest?",
+        "He's a BSH mix",
+        "Truly the goodest boy",
+        "Not fat at all",
+        "Wow, that's a good score!",
+        "Got some time on your hands I guess...",
+        "You bored yet?",
+        "K, you can stop now",
+        "Seriously, Aaron said this breaks after 200",
+        "How he reached that I do not know",
+        "But really, you should stop clicking a cat",
+        "Just because you could doesnt mean you should, y'know?",
+        "You have better things to do with your time surely",
+        "Bombastic side eye",
+        "Criminally offensive side eye",
+        "Ok whatever, you do you boo"
+      ];
+
+      function updateMessage() {
+        const messageIndex = Math.floor((counter - 1) / 2);
+        message.textContent = messages[Math.min(messageIndex, messages.length - 1)] || "You good bro?";
+      }
 
       function animate() {
-        const screenHeight = document.body.clientHeight;
         const screenWidth = document.body.clientWidth;
+        const screenHeight = document.body.clientHeight;
+        const georgieWidth = georgie.clientWidth;
+        const georgieHeight = georgie.clientHeight;
 
         if (y + georgieHeight >= screenHeight || y < 0) {
           dirY *= -1;
-
         }
+
         if (x + georgieWidth >= screenWidth || x < 0) {
           dirX *= -1;
-
         }
+
         x += dirX * speed;
         y += dirY * speed;
         georgie.style.left = x + "px";
         georgie.style.top = y + "px";
+
         window.requestAnimationFrame(animate);
       }
 
@@ -115,6 +143,10 @@
         speed++;
         counter++;
         score.textContent = counter;
+
+        if (counter % 2 === 0) {
+          updateMessage();
+        }
       });
 
       window.requestAnimationFrame(animate);
