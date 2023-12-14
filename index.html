@@ -199,10 +199,16 @@
         counter++;
         score.textContent = counter;
 
+        // Decrease width and height by 1% on each click
+        const newWidth = georgie.offsetWidth * 0.5;
+        const newHeight = georgie.offsetHeight * 0.5;
+        georgie.style.width = newWidth + 'px';
+        georgie.style.height = newHeight + 'px';
+
         if (counter % 2 === 0) {
           updateMessage();
         }
-      });
+    });
 
       window.requestAnimationFrame(animate);
     </script>
