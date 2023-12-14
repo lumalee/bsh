@@ -6,6 +6,7 @@
     <title>Georgie! 🐱</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Preahvihear&display=swap">
     <style>
+      /* Basic styling for the page, setting margins, padding, and font */
       * {
         margin: 0;
         padding: 0;
@@ -82,15 +83,18 @@
     </main>
     
     <script>
-      let x = 0,
-        y = 0,
-        dirX = 1,
-        dirY = 1;
-      let speed = 2.5;
-      let counter = 0;
-      let score = document.getElementById("score-display");
-      let georgie = document.getElementById("georgie");
 
+      // Initialize variables for animation and scoring
+      let x = 0,
+          y = 0,
+          dirX = 1,
+          dirY = 1,
+          speed = 2.5,
+          counter = 0,
+          score = document.getElementById("score-display"),
+          georgie = document.getElementById("georgie");
+
+      // Array of messages displayed based on the score
       const messages = [
         "Isn't he the cutest?",
         "He's a BSH mix",
@@ -166,51 +170,56 @@
         "Seriously, you good bro",
         ""
       ];
-
+      // Update the message displayed based on the current score
       function updateMessage() {
         const messageIndex = Math.floor((counter - 1) / 2);
         message.textContent = messages[Math.min(messageIndex, messages.length - 1)] || "";
       }
 
+      // Animation loop to move Georgie around the screen
       function animate() {
         const screenWidth = document.body.clientWidth;
         const screenHeight = document.body.clientHeight;
         const georgieWidth = georgie.clientWidth;
         const georgieHeight = georgie.clientHeight;
 
+        // Bounce off the edges of the screen
         if (y + georgieHeight >= screenHeight || y < 0) {
           dirY *= -1;
         }
-
         if (x + georgieWidth >= screenWidth || x < 0) {
           dirX *= -1;
         }
 
+        // Move Georgie and request the next animation frame
         x += dirX * speed;
         y += dirY * speed;
         georgie.style.left = x + "px";
         georgie.style.top = y + "px";
-
         window.requestAnimationFrame(animate);
       }
-      
-      georgie.addEventListener("click", (e) => {
-        speed++;
-        counter++;
-        score.textContent = counter;
 
-        // Decrease width and height by 1% on each click
-        const newWidth = georgie.offsetWidth * 0.5;
-        const newHeight = georgie.offsetHeight * 0.5;
-        georgie.style.width = newWidth + 'px';
-        georgie.style.height = newHeight + 'px';
+        // Event listener for clicks on Georgie
+        georgie.addEventListener("click", (e) => {
+          speed+= 0.5; // Increase speed
+          counter++; // Increment counter
+          score.textContent = counter; // Update score display
+          
+          // Update the dimensions of the Georgie element on click
+          const newWidth = georgie.offsetWidth * 0.99;
+          const newHeight = georgie.offsetHeight * 0.99;
+          georgie.style.width = newWidth + 'px';
+          georgie.style.height = newHeight + 'px';
 
-        if (counter % 2 === 0) {
-          updateMessage();
-        }
-    });
+          // Update the displayed message every second click
+          if (counter % 2 === 0) {
+            updateMessage();
+          }
+      });
 
+      // Start the animation loop
       window.requestAnimationFrame(animate);
+
     </script>
   </body>
 </html>
